@@ -15,4 +15,7 @@ emissary-ingress:
         port: 443
         targetPort: 8443
         protocol: UDP
-        
+      - name: postgresql
+        port: 5432
+        targetPort: 5432
+        protocol: TCP

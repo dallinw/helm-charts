@@ -1,0 +1,9 @@
+postgresql:
+  enabled: true
+  auth:
+    enablePostgresUser: true
+    database: "development"
+
+redis:
+  enabled: true
+  architecture: standalone
