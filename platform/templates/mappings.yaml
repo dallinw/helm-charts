@@ -1,0 +1,20 @@
+{{- $fullName := include "platform.fullname" . -}}
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name: {{ $fullName }}-postgresql
+  labels:
+    {{- include "platform.labels" . | nindent 4 }}
+spec:
+  port: 5432
+  service: {{ $fullName }}-postgresql:5432
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name: {{ $fullName }}-redis
+  labels:
+    {{- include "platform.labels" . | nindent 4 }}
+spec:
+  port: 6379
+  service: {{ $fullName }}-redis:6379
