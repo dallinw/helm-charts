@@ -1,9 +1,9 @@
 postgresql:
-  enabled: true
+  enabled: false
   auth:
     enablePostgresUser: true
     database: "development"
 
 redis:
-  enabled: true
+  enabled: false
   architecture: standalone
