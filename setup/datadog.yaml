@@ -1,0 +1,26 @@
+targetSystem: "linux"
+datadog:
+  site: datadoghq.com
+  # If not using secrets, then use apiKey and appKey instead
+  apiKeyExistingSecret: datadog-secret
+  clusterName: dallin.local
+  tags: []
+    # datadog.kubelet.tlsVerify should be `false` on kind and minikube
+    # to establish communication with the kubelet
+    # kubelet:
+  tlsVerify: "false"
+  logs:
+    enabled: true
+    containerCollectAll: false
+    containerCollectUsingFiles: true
+  apm:
+    portEnabled: true
+    socketPath: /var/run/datadog/apm.socket
+    hostSocketPath: /var/run/datadog/
+  processAgent:
+    enabled: true
+    processCollection: false
+  systemProbe:
+    enableTCPQueueLength: false
+    enableOOMKill: true
+    collectDNSStats: false

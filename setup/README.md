@@ -16,7 +16,7 @@ Ambassador is the ingress controller chosen, as it provides by far the best out-
 
 Ingress controllers like Traefik, Nginx, Kong, etc. lack this feature along with some smaller developer experience and quality of life features, so as such was chosen.
 
-## Installation
+## Install API Gateway
 
 [Go here and create an account](https://app.getambassador.io/cloud/welcome) if you have not already.
 
@@ -27,7 +27,7 @@ helm repo add datawire https://www.getambassador.io && \
 helm repo update
 ```
 
-### Install with Helm 3
+### Install Ambassador API Gateway with Helm 3
 
 Setup the namespace and install the custom kubernetes resource definitions.
 ```bash
@@ -48,3 +48,14 @@ Wait for the deployment to finish.
 ```bash
 kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
 ```
+
+## Install Monitoring
+
+```bash
+kubectl create secret generic datadog-secret --from-literal api-key="eab59422a5f534cc3d86da41c200e577"
+```
+
+```bash
+helm install datadog --namespace datadog -f datadog.yaml datadog/datadog 
+```
+
