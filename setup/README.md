@@ -52,7 +52,7 @@ kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lprod
 ## Install Monitoring
 
 ```bash
-kubectl create secret generic datadog-secret --from-literal api-key="eab59422a5f534cc3d86da41c200e577"
+kubectl create secret generic datadog-secret --from-literal api-key="<YOUR_API_KEY>"
 ```
 
 ```bash
