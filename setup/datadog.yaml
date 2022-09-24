@@ -4,6 +4,8 @@ datadog:
   # If not using secrets, then use apiKey and appKey instead
   apiKeyExistingSecret: datadog-secret
   clusterName: dallin.local
+  systemProbe:
+    enabled: false
   tags: []
     # datadog.kubelet.tlsVerify should be `false` on kind and minikube
     # to establish communication with the kubelet
@@ -20,7 +22,3 @@ datadog:
   processAgent:
     enabled: true
     processCollection: false
-  systemProbe:
-    enableTCPQueueLength: false
-    enableOOMKill: true
-    collectDNSStats: false
