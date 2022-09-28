@@ -61,8 +61,7 @@ jobs:
       - name: Get chart version
         id: get-version
         run: |
-          chart_version=$(cat ${{  env.CHART_DIRECTORY }}/Chart.yaml  | grep ^version | awk '{print $2}')
-          echo "::set-output chart_version=$chart_version"
+          echo "::set-output chart_version=$(cat ${{  env.CHART_DIRECTORY }}/Chart.yaml  | grep ^version | awk '{print $2}')"
 
       - uses: actions/upload-artifact@v3
         with:
