@@ -1,15 +1,11 @@
 targetSystem: "linux"
 datadog:
   site: datadoghq.com
-  # If not using secrets, then use apiKey and appKey instead
   apiKeyExistingSecret: datadog-secret
   clusterName: dallin.local
   systemProbe:
     enabled: false
   tags: []
-    # datadog.kubelet.tlsVerify should be `false` on kind and minikube
-    # to establish communication with the kubelet
-    # kubelet:
   tlsVerify: "false"
   logs:
     enabled: true
