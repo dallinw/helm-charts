@@ -6,12 +6,16 @@ on:
     branches:
       - main
 
+env:
+  CHART_DIRECTORY: ./platform
+
 permissions:
   id-token: write
   contents: read
 
 jobs:
-  Lint:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -33,3 +37,22 @@ jobs:
 
       - name: Run chart-testing (lint)
         run: ct lint --target-branch ${{ github.event.repository.default_branch }}
+
+  publish:
+    name: Build and Publish
+    needs:
+      - lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+
+      - name: Update helm chart dependencies
+        working-directory: ${{ env.CHART_DIRECTORY }}
+        run: helm dep up
+
+      - name: Package
+        run: helm package platform
