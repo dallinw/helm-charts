@@ -8,6 +8,7 @@ on:
 
 env:
   CHART_DIRECTORY: ./platform
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 permissions:
   id-token: write
@@ -56,3 +57,14 @@ jobs:
 
       - name: Package
         run: helm package platform
+
+      - name: Get chart version
+        id: get-version
+        run: |
+          chart_version=$(cat ${{  env.CHART_DIRECTORY }}/Chart.yaml  | grep ^version | awk '{print $2}')
+          echo "::set-output chart_version=$chart_version"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.CHART_DIRECTORY }}
+          path: ${{ env.CHART_DIRECTORY }}-${{ steps.get-version.outputs.chart_version }}.tar.gz
